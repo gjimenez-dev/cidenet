@@ -1,4 +1,4 @@
-
+## Instalación y configuración del proyecto front
 
 Para iniciar el funcionamiento del proyecto front, hacemos lo siguiente:
 
@@ -39,7 +39,7 @@ ng build
 ```
 ## Estructura del proyecto front
 
-El proyecto está desarrollado con angular2+, y está dividido de la siguiente manera:
+El proyecto está desarrollado con Angular2+, Angular-material 2 y Bootstrap 5. Está dividido de la siguiente manera:
 
 - app
   - core

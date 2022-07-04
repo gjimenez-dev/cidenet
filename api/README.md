@@ -8,7 +8,7 @@ El objetivo de este proyecto es tener toda la lógica necesaria de la solución 
 	
 ## Estructura del proyecto api
 
-El proyecto está desarrollado con nodejs (express), y está dividido de la siguiente manera:
+El proyecto está desarrollado con nodejs (express) y sequelize, y está dividido de la siguiente manera:
 
 -   controladores: [controller](./controllers)
 -   modelos: [models](./models/)
