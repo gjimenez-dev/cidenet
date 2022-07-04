@@ -1,0 +1,137 @@
+<h2 mat-dialog-title>Registrar Empleado</h2>
+<hr/>
+<mat-dialog-content class="mat-typography">
+    <div class="row">
+        <div class="col-md-6">
+            <mat-form-field appearance="fill" class="mat-custom-field">
+                <mat-label>Primer Apellido</mat-label>
+                <input matInput [(ngModel)]="data.cSurname" type="text" [max]="20"
+                placeholder="Ingrese primer apellido" [formControl]="cSurname"
+                (keypress)="validatedCharacter($event, 'char')" (keydown)="notKeyDown($event)"
+                (ngModelChange)="data.cSurname = $event.toUpperCase()">
+                <mat-error *ngIf="cSurname.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-md-6">
+            <mat-form-field appearance="fill" class="mat-custom-field">
+                <mat-label>Segundo Apellido</mat-label>
+                <input matInput [(ngModel)]="data.cSecondSurname" type="text" [max]="20"
+                placeholder="Ingrese segundo apellido" [formControl]="cSecondSurname"
+                (keypress)="validatedCharacter($event, 'char')" (keydown)="notKeyDown($event)"
+                (ngModelChange)="data.cSecondSurname = $event.toUpperCase()">
+                <mat-error *ngIf="cSecondSurname.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-md-6">
+            <mat-form-field appearance="fill" class="mat-custom-field">
+                <mat-label>Primer Nombre</mat-label>
+                <input matInput [(ngModel)]="data.cFirstName" type="text" [max]="20"
+                placeholder="Ingrese primer nombre" [formControl]="cFirstName"
+                (keypress)="validatedCharacter($event, 'char')" (keydown)="notKeyDown($event)"
+                (ngModelChange)="data.cFirstName = $event.toUpperCase()">
+                <mat-error *ngIf="cFirstName.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-md-6">
+            <mat-form-field appearance="fill" class="mat-custom-field">
+                <mat-label>Otros Nombres</mat-label>
+                <input matInput [(ngModel)]="data.cOthersName" type="text" [max]="50"
+                placeholder="Ingrese otros nombres" [formControl]="cOthersName"
+                (keypress)="validatedCharacter($event, 'charSpace')" (keydown)="notKeyDown($event)"
+                (ngModelChange)="data.cOthersName = $event.toUpperCase()">
+            </mat-form-field>
+        </div>
+        <div class="col-md-6">
+            <mat-form-field appearance="fill" class="mat-custom-field">
+                <mat-label>País de Empleo</mat-label>
+                <mat-select
+                [(ngModel)]="data.nCountry"
+                [ngModelOptions]="{standalone: true}">
+                    <mat-option *ngFor="let country of countryArray" [value]="country.nCountry">
+                        {{country.cDescription}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-6">
+            <mat-form-field appearance="fill" class="mat-custom-field">
+                <mat-label>Tipo de Identificación</mat-label>
+                <mat-select
+                [(ngModel)]="data.nTypeID"
+                [ngModelOptions]="{standalone: true}">
+                    <mat-option *ngFor="let type of typeIDArray" [value]="type.nTypeID">
+                        {{type.cDescription}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-6">
+            <mat-form-field appearance="fill" class="mat-custom-field">
+                <mat-label>Número de Identificación</mat-label>
+                <input matInput [(ngModel)]="data.cNumberID" type="text" [max]="20"
+                placeholder="Ingrese número de ID" [formControl]="cNumberID"
+                (keypress)="validatedCharacter($event, 'alphanum')" (keydown)="notKeyDown($event)">
+            </mat-form-field>
+        </div>
+        <div class="col-md-6">
+            <mat-form-field appearance="fill" class="mat-custom-field">
+                <mat-label>Correo Electrónico</mat-label>
+                <input matInput [(ngModel)]="data.cEmail" [readonly]="true" [disabled]="true">
+            </mat-form-field>
+        </div>
+        <div class="col-md-6">
+            <mat-form-field appearance="fill" class="mat-custom-field">
+                <mat-label>Fecha de Ingreso</mat-label>
+                <input matInput [(ngModel)]="data.dAdmissionDate" [formControl]="dAdmissionDate"
+                [matDatepicker]="datepicker" [min]="minDate" [max]="maxDate">
+                <mat-hint>DD/MM/YYYY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+                <mat-datepicker #datepicker>
+                  <mat-datepicker-actions>
+                    <button mat-button matDatepickerCancel>Cancel</button>
+                    <button mat-raised-button color="primary" matDatepickerApply>Seleccionar</button>
+                  </mat-datepicker-actions>
+                </mat-datepicker>
+              </mat-form-field>
+        </div>
+        <div class="col-md-6">
+            <mat-form-field appearance="fill" class="mat-custom-field">
+                <mat-label>Área</mat-label>
+                <mat-select
+                [(ngModel)]="data.nArea"
+                [ngModelOptions]="{standalone: true}">
+                    <mat-option *ngFor="let area of areaArray" [value]="area.nArea">
+                        {{area.cDescription}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-6">
+            <mat-form-field appearance="fill" class="mat-custom-field">
+                <mat-label>Estado</mat-label>
+                <input matInput [value]="'Activo'" [readonly]="true" [disabled]="true">
+            </mat-form-field>
+        </div>
+        <div class="col-md-6">
+            <mat-form-field appearance="fill" class="mat-custom-field">
+                <mat-label>Fecha y Hora Registro</mat-label>
+                <input matInput value="{{this.today | date:'dd/MM/YYYY HH:mm:ss'}}" [readonly]="true" [disabled]="true">
+            </mat-form-field>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+    <button mat-button mat-dialog-close
+    class="btn btn_gray">
+        Cancelar
+    </button>
+    <button mat-button
+    class="btn btn_orange_modal"
+    (click)="saveData()"
+    [disabled]="data.cFirstName == null || data.cFirstName == '' ||
+    data.cSurname == null || data.cSurname == '' ||
+    data.cSecondSurname == null || data.cSecondSurname == ''"
+    >
+        Guardar
+    </button>
+</mat-dialog-actions>

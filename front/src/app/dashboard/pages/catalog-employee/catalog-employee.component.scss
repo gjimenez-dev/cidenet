@@ -1,0 +1,24 @@
+@import './../../../../assets/styles/container';
+
+@include main-container {
+
+    table {
+        .bg-th {
+            background-color: var(--backgroundBlue) !important;
+            font-weight: 500;
+            font-size: normal !important;
+            color: var(--whiteTxt);
+        }
+    }
+
+    .input-filter {
+        color: var(--blackMediumTxt) !important;
+        font-size: 14px;
+        width: 50%;
+    }
+
+    .gray {
+        background-color: #dfdddd;
+    }
+
+}

@@ -1,0 +1,29 @@
+/*
+ * Titulos principales / tableros
+ * @include main-container-title{};
+ */
+@mixin main-container-title {
+  .main-container-title {
+    font-size: large;
+    font-weight: bold;
+    color:var(--blueTxt);
+    font-size: xx-large;
+    @content;
+  }
+}
+
+/*
+ * Contenedor pantalla completa
+ * Usado con container-footer
+ * @include main-container{};
+ */
+@mixin main-container {
+  .main-container {
+    height: calc( 100vh - 113px); // ~ calc(100vh - 116px)
+    overflow: auto;
+
+    @include main-container-title;
+
+    @content;
+  }
+}

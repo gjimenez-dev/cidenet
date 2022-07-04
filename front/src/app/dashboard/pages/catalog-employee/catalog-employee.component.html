@@ -1,0 +1,120 @@
+<div class="container-fluid main-container">
+    <div class="row">
+        <div class="col-12 mt-3 mb-1">
+            <span class="main-container-title">Listado de Empleados</span>
+        </div>
+        <div class="col-12 d-flex justify-content-between">
+            <mat-form-field appearance="fill" class="input-filter">
+                <mat-label>Filtrar</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Ej. Maria" #input>
+            </mat-form-field>
+            <button class="btn btn_orange pull-right" (click)="modalNewEmployee()" type="button">
+                Agregar Empleado
+            </button>
+        </div>
+        <div class="col-12">
+            <table mat-table [dataSource]="dataSource" class="w-100"
+            matSort (matSortChange)="announceSortChange($event)">
+            
+                <ng-container matColumnDef="cFirstName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="" class="bg-th">
+                        {{titleCol[0]}}
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.cFirstName}} </td>
+                </ng-container>
+            
+                <ng-container matColumnDef="cOthersName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="" class="bg-th">
+                        {{titleCol[1]}}
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.cOthersName}} </td>
+                </ng-container>
+            
+                <ng-container matColumnDef="cSurname">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="" class="bg-th">
+                        {{titleCol[2]}}
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.cSurname}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="cSecondSurname">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="" class="bg-th">
+                        {{titleCol[3]}}
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.cSecondSurname}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="nTypeID">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="" class="bg-th">
+                        {{titleCol[4]}}
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.typeid ? element.typeid.cDescription : ''}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="cNumberID">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="" class="bg-th">
+                        {{titleCol[5]}}
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.cNumberID}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="nCountry">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="" class="bg-th">
+                        {{titleCol[6]}}
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.country ? element.country.cDescription : ''}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="cEmail">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="" class="bg-th">
+                        {{titleCol[7]}}
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.cEmail}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="nArea">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="" class="bg-th">
+                        {{titleCol[8]}}
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.area ? element.area.cDescription : ''}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="bStatus">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="" class="bg-th">
+                        {{titleCol[9]}}
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.bStatus == 1 ? 'Activo' : 'Inactivo'}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="acciones">
+                    <th class="bg-th" mat-header-cell *matHeaderCellDef class="bg-th">
+                        {{titleCol[10]}}
+                    </th>
+                    <td mat-cell *matCellDef="let row">
+                        <button mat-icon-button
+                        [matTooltip]="'Eliminar'"
+                        matTooltipClass="tooltip-class">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button
+                        [matTooltip]="'Eliminar'"
+                        matTooltipClass="tooltip-class"
+                        (click)="deleteEmployee(row.nId)"
+                        >
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+            
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns; let even = even;"
+                [ngClass]="{'gray': even}"></tr>
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No hay empleados registrados</td>
+                </tr>
+            </table>
+            
+            <mat-paginator [pageSizeOptions]="[10]" aria-label="Select page of users"></mat-paginator>
+        </div>
+    </div>
+</div>
